@@ -24,11 +24,11 @@
                 Account
                 <hr>
                 <ul>
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="viewProfile.php">View Profile</a></li>
-                    <li><a href="editProfile.php">Edit Profile</a></li>
-                    <li><a href="profilePicture.php">Change Profile Picture</a></li>
-                    <li><a href="changePassword.php">Change Password</a></li>
+                    <li><a href="task_E.php">Dashboard</a></li>
+                    <li><a href="task_F.php">View Profile</a></li>
+                    <li><a href="task_G.php">Edit Profile</a></li>
+                    <li><a href="task_H.php">Change Profile Picture</a></li>
+                    <li><a href="task_I.php">Change Password</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
             </td>
@@ -36,8 +36,8 @@
             <fieldset>
                 <legend><b>VIEW PROFILE</b></legend>
                 <form action="viewProfile.php" method="POST">
-                    <img src="Profile.png" alt="Profile Picture" width="100"><br>
-                    <a href="changeProfilePicture.php">Change</a><br><br>
+                    <img src="pro.png" alt="Pro Pic" width="100"><br>
+                    <a href="task_I.php">Change</a><br><br>
 
                     Name: Bob<hr>
                     Email: abc@aiub.edu<hr>
