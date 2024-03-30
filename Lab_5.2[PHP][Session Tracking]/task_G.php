@@ -37,7 +37,7 @@
                 <fieldset>
                     <legend><b>EDIT PROFILE</b></legend>
                         <form action="task_G.php" method="POST">
-                            Name: <input type="text" name="name" value="ABC"><br>
+                            Name: <input type="text" name="name" value="Bob"><br>
                             Email:<input type="email" name="email" value="abc@aiub.edu"><br>
                             Gender:<input type="text" name="gender" value="Male"><br>
                             Date of Birth:<input type="text" name="dob" value="01/01/2001"><br>
