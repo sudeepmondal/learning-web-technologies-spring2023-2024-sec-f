@@ -35,8 +35,8 @@
                 <td><?php echo $status[$i]['Username']; ?></td>
                 <td><?=$status[$i]['Password'] ?></td>
                 <td>
-                    <a href="updatEmplyee.php?id=<?=$attendees[$i]['eID']?>"> Edit </a> |
-                    <a href="deleteEmployee.php?id=<?=$attendees[$i]['eID']?>"> Delete </a> 
+                    <a href="eupdate.php?id=<?=$attendees[$i]['eID']?>"> Edit </a> | 
+                    <a href="edelete.php?id=<?=$attendees[$i]['eID']?>"> Delete </a> 
                 </td>
             </tr>
             <?php } ?>
