@@ -2,7 +2,7 @@
     require_once('../model/userModel.php');
 
     if(!isset($_COOKIE['flag'])){
-        header('location: signin.php');
+        header('location: login.php');
     }
     
     $users = getAllProduct();
