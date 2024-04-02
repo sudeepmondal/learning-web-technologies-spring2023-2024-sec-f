@@ -1,9 +1,9 @@
 <?php 
     require_once('db.php');
 
-    function login($usertype, $username, $password ){
+    function login($username, $password){
         $con = dbConnection();
-        $sql = "select * from users where usertype='{$usertype}' and username='{$username}' and password='{$password}'";
+        $sql = "select * from employee where Username='{$username}' AND Password='{$password}'";
         $result = mysqli_query($con, $sql);
         $count = mysqli_num_rows($result);
 
@@ -14,9 +14,9 @@
         }
     }
 
-    function getAllUser(){
+    function getAllEmployee(){
         $con = dbConnection();
-        $sql = "select * from users";
+        $sql = "select * from employee";
         $result = mysqli_query($con, $sql);
         $users = [];
 
@@ -31,9 +31,9 @@
 
     }
 
-    function createUser($user){
+    function createEmployee($user){
         $con = dbConnection();
-        $sql = "insert into users values('{$user['usertype']}', '{$user['name']}', '{$user['email']}', '{$user['phone']}', '{$user['username']}', '{$user['password']}', '{$user['gender']}' )";       
+        $sql = "insert into employee values('', '{$user['Name']}', '{$user['ContactNo']}', '{$user['Username']}', '{$user['Password']}')";       
         if(mysqli_query($con, $sql)){
             return true;
         }else{
@@ -41,57 +41,131 @@
         }
     }
 
-    function deleteUser($id){
-
+    function deleteEmployee($id){
+        $con = dbConnection();
+        $sql = "delete from employee where eID = '$id'";       
+        if(mysqli_query($con, $sql)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    function updateUserpass($pass,$email){
+    function updateEmployee($id, $name, $phone, $uname, $password) {
         $con = dbConnection();
-        $sql = "update users set password = '$pass' where email = '$email'";
-        if(mysqli_query($con, $sql)) {
+        $sql = "update employee set Name = '$name', ContactNo = '$phone', Username = '$uname', Password = '$password' where eID = '$id'";
+        $result = mysqli_query($con, $sql);
+        if($result) {
             return true;
         } else {
             return false;
         }
     }
 
-    function getAnUser($username) {
+    function getEmployeedetails($id) {
         $con = dbConnection();
-        $sql = "select name FROM users WHERE username = '$username'";
+        $sql = "select * FROM employee WHERE eID = '$id'";
         $result = mysqli_query($con, $sql);
         $name = [];
         while($row = mysqli_fetch_assoc($result)){
             array_push($name, $row);
         }
         return $name;
+    }
+
+    function searchEmployee($arg){
+        $con = dbConnection();
+        if($arg['uname'] == "" && $arg['id'] == ""){
+            $sql = "select * FROM employee WHERE Name LIKE '%" . $arg['name'] . "%'";
+            $result = mysqli_query($con, $sql);
+            $events = [];
+    
+            while($row = mysqli_fetch_assoc($result)){
+                array_push($events, $row);
+            }
+    
+            return $events;
+        } elseif($arg['uname'] == ""){
+            $sql = "select * FROM employee WHERE Name LIKE '%" . $arg['name'] . "%' AND eID = '{$arg['id']}'";
+            $result = mysqli_query($con, $sql);
+            $events = [];
+    
+            while($row = mysqli_fetch_assoc($result)){
+                array_push($events, $row);
+            }
+    
+            return $events;
+        } elseif($arg['name'] == "" && $arg['id'] == ""){
+            $sql = "select * FROM employee WHERE Username = '{$arg['uname']}'";
+            $result = mysqli_query($con, $sql);
+            $events = [];
+    
+            while($row = mysqli_fetch_assoc($result)){
+                array_push($events, $row);
+            }
+    
+            return $events;
+        } else {
+
+            echo "No data found!";
+        }
     }
     
-    function getUserdetails($username) {
+    function addProduct($pdt){
         $con = dbConnection();
-        $sql = "select * FROM users WHERE username = '$username'";
-        $result = mysqli_query($con, $sql);
-        $name = [];
-        while($row = mysqli_fetch_assoc($result)){
-            array_push($name, $row);
+        $sql = "insert into product values('', '{$pdt['Name']}', '{$pdt['Quantity']}', '{$pdt['Price']}')";       
+        if(mysqli_query($con, $sql)){
+            return true;
+        }else{
+            return false;
         }
-        return $name;
     }
 
-    function updateUser($user){
-
-    }
-
-    function getEventname($user){
+    function getAllProduct(){
         $con = dbConnection();
-        $sql = "select event_name from events";       
+        $sql = "select * from product";
         $result = mysqli_query($con, $sql);
-        $events = [];
+        $products = [];
 
         while($row = mysqli_fetch_assoc($result)){
-            array_push($events, $row);
+            array_push($products, $row);
         }
 
-        return $events;
+        return $products;
+    }
+
+    function deleteProduct($id){
+        $con = dbConnection();
+        $sql = "delete from product where pID = '$id'";       
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function updateProduct($id, $pname, $quantity, $price){
+        $con = dbConnection();
+        $sql = "update product set Name = '$pname', Quantity = '$quantity', Price = '$price' where pID = '$id'";
+        $result = mysqli_query($con, $sql);
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getProduct($id) {
+        $con = dbConnection();
+        $sql = "select * FROM product WHERE pID = '$id'";
+        $result = mysqli_query($con, $sql);
+        $details = [];
+        while($row = mysqli_fetch_assoc($result)){
+            array_push($details, $row);
+        }
+        return $details;
     }
 
 ?>
